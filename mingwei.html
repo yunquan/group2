@@ -1,0 +1,99 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>输入验证</title>
+<style type="text/css">
+#div1{
+    width:500px;  
+    height:300px;  
+    position:absolute;  
+    left:50%;  
+    top:50%;  
+    margin:-100px 0 0 -250px 
+}
+#div2{
+	margin-left:60px;
+}
+#text{
+	border-color:#CCC;
+	border-radius:5px 5px 5px 5px;
+	height:25px;
+}
+#button{
+	background:#06F;
+	border-radius:5px 5px 5px 5px;
+	padding: 5px 10px 6px;
+	color: #fff;
+	position: relative;
+	
+
+}
+</style>
+</head>
+
+<body>
+<div id="div1">
+<form  >
+名称
+&nbsp;
+<input type="text" id="text" onBlur="isnone()" >
+<input  type="button"  value="验证" onClick="check()" id="button">
+</form>
+
+<div id="div2">
+<font size="1" color="#999999">必填，长度为4~16个字符</font>
+</div>
+
+
+</div>
+
+<script type="text/jscript" >
+
+	function check(){
+		var reg = new RegExp("[\\u4E00-\\u9FFF]{2,8}","g");
+		
+	if(document.getElementById("text").value==''){
+		document.getElementById("div2").innerHTML="<font size='1' color='#C30' >名字不能为空</font>";
+		document.getElementById("text").style.cssText="border-color:#C30";
+	}
+	else{
+	var str = document.getElementById("text").value;
+	
+	if(reg.test(str)){
+		if(str.length<2||str.length>8){
+			
+	document.getElementById("div2").innerHTML="<font size='1' color='#C30'>中文字符长度为2~8</font>";
+	document.getElementById("text").style.cssText="border-color:#C30";
+		}
+		else{
+		document.getElementById("div2").innerHTML="<font size='1' color='#0F0'>名称格式正确</font>";
+		document.getElementById("text").style.cssText="border-color:#0F0";
+	}
+	}
+	else {
+	if(str.length<4 || str.length>16){
+	document.getElementById("div2").innerHTML="<font size='1' color='#C30'>英文字母、数字、英文符号长度为4~16</font>";	
+	document.getElementById("text").style.cssText="border-color:#C30";
+	}
+	else{
+		document.getElementById("div2").innerHTML="<font size='1' color='#0F0'>名称格式正确</font>";
+		document.getElementById("text").style.cssText="border-color:#0F0";
+	}
+	}
+	}
+	}
+	
+	function isnone(){
+		var str = document.getElementById("text").value;
+		if(str.length=='')
+		{
+			document.getElementById("div2").innerHTML="<font size='1' color='#999999'>必填，长度为4~16个字符</font>";
+			document.getElementById("text").style.cssText="border-color:#999999";
+		}
+	}
+	
+</script>
+
+</body>
+</html>
